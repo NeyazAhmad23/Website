@@ -1,49 +1,49 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import blogService from '../services/blogService';
 import './Blog.css';
 
 const Blog = () => {
-  const blogPosts = [
-    {
-      id: 1,
-      title: "My Journey into Web Development",
-      excerpt: "How I discovered my passion for creating digital experiences and the technologies that shaped my path.",
-      date: "2024-01-15",
-      readTime: "5 min read",
-      category: "Technology"
-    },
-    {
-      id: 2,
-      title: "Family Adventures: Our Summer Vacation",
-      excerpt: "Sharing the wonderful memories we created during our family trip and the lessons learned along the way.",
-      date: "2024-01-10",
-      readTime: "3 min read",
-      category: "Family"
-    },
-    {
-      id: 3,
-      title: "Reflections on Work-Life Balance",
-      excerpt: "Thoughts on maintaining harmony between professional goals and personal relationships.",
-      date: "2024-01-05",
-      readTime: "4 min read",
-      category: "Life"
-    },
-    {
-      id: 4,
-      title: "Building This Personal Website",
-      excerpt: "The technical decisions and design choices that went into creating this personal space on the web.",
-      date: "2024-01-01",
-      readTime: "6 min read",
-      category: "Technology"
-    }
-  ];
+  const [blogPosts, setBlogPosts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [loading, setLoading] = useState(true);
 
-  const categories = ["All", "Technology", "Family", "Life"];
-  const [selectedCategory, setSelectedCategory] = React.useState("All");
+  useEffect(() => {
+    // Load blog data when component mounts
+    const loadBlogData = () => {
+      try {
+        const posts = blogService.getAllPosts();
+        const cats = blogService.getCategories();
+        
+        setBlogPosts(posts);
+        setCategories(cats.map(cat => cat.name));
+        setLoading(false);
+      } catch (error) {
+        console.error('Error loading blog data:', error);
+        setLoading(false);
+      }
+    };
+
+    loadBlogData();
+  }, []);
 
   const filteredPosts = selectedCategory === "All" 
     ? blogPosts 
-    : blogPosts.filter(post => post.category === selectedCategory);
+    : blogService.getPostsByCategory(selectedCategory);
+
+  if (loading) {
+    return (
+      <div className="blog">
+        <div className="container">
+          <div className="blog-header">
+            <h1>My Blog</h1>
+            <p className="blog-intro">Loading posts...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="blog">
