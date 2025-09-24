@@ -1,0 +1,75 @@
+/* Blog Post Page Styles */
+.blog-post {
+  padding: 2rem 0;
+}
+
+.post-navigation {
+  margin-bottom: 1rem;
+}
+
+.back-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.back-link:hover {
+  color: var(--primary-hover);
+}
+
+.post-content {
+  background: var(--background);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  box-shadow: var(--shadow);
+}
+
+.post-header {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.post-meta {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.post-title {
+  margin-top: 0.75rem;
+  margin-bottom: 0;
+}
+
+.post-body p {
+  margin-bottom: 1rem;
+}
+
+.post-body h2, .post-body h3 {
+  margin-top: 1.5rem;
+}
+
+.post-body ul {
+  padding-left: 1.25rem;
+  margin: 0.75rem 0 1rem;
+}
+
+.post-footer {
+  margin-top: 1.5rem;
+  text-align: right;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .blog-post {
+    padding: 1rem 0;
+  }
+  .post-content {
+    padding: 1.25rem;
+  }
+}
