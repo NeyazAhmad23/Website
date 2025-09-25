@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import ThemeToggle from './ThemeToggle';
 import './Layout.css';
 
 const Layout = ({ children }) => {
@@ -16,7 +17,8 @@ const Layout = ({ children }) => {
           <Link to="/" className="logo">
             Neyaz Ahmad
           </Link>
-          <ul className="nav-links">
+          <div className="nav-right">
+            <ul className="nav-links">
             <li>
               <Link to="/" className={isActive('/')}>
                 Home
@@ -38,6 +40,8 @@ const Layout = ({ children }) => {
               </Link>
             </li>
           </ul>
+          <ThemeToggle />
+          </div>
         </nav>
       </header>
       
